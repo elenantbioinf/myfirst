@@ -1,2 +1,2 @@
 # myfirst
-A project to practice reproducible research partices 
+A project to practice reproducible research pratices 
