@@ -5,9 +5,11 @@ getwd()
 #Instalación paquetes necesarios
 install.packages("tidyverse")
 install.packages("glue")
+install.packages("lubridate")
 
 library(tidyverse)
 library(glue)
+library(lubridate)
 
 #ReadMe
 
@@ -115,3 +117,51 @@ read_fwf("data/ghcnd_all/ASN00008255.dly",
          col_types = cols(.default = col_character()),
          col_select = c(ID, YEAR, MONTH, ELEMENT, starts_with("VALUE"))
 )
+
+#Crear un vector para los archivos de interés 
+
+dly_files <- list.files("data/ghcnd_all", full.names = TRUE)
+
+#Leer todos los archivos de interés de una vez
+read_fwf(dly_files,
+         fwf_widths(widths, headers),
+         na = c("NA", "-9999", ""),
+         col_types = cols(.default = col_character()),
+         col_select = c(ID, YEAR, MONTH, ELEMENT, starts_with("VALUE"))
+)
+
+#Conocer de cuántas estaciones tenemos informacion
+read_fwf(dly_files,
+         fwf_widths(widths, headers),
+         na = c("NA", "-9999", ""),
+         col_types = cols(.default = col_character()),
+         col_select = c(ID, YEAR, MONTH, ELEMENT, starts_with("VALUE"))
+) %>% count(ID)
+
+#Conocer de cuántos años tenemos información
+read_fwf(dly_files,
+         fwf_widths(widths, headers),
+         na = c("NA", "-9999", ""),
+         col_types = cols(.default = col_character()),
+         col_select = c(ID, YEAR, MONTH, ELEMENT, starts_with("VALUE"))
+) %>% count(YEAR) %>% print(n = Inf) 
+
+#Limpieza de datos
+read_fwf(dly_files,
+         fwf_widths(widths, headers),
+         na = c("NA", "-9999", ""),
+         col_types = cols(.default = col_character()),
+         col_select = c(ID, YEAR, MONTH, ELEMENT, starts_with("VALUE")))  %>% 
+  rename_all(tolower) %>%
+  filter(element ==  "PRCP") %>%
+  select(-element) %>% 
+  pivot_longer(cols = starts_with("value"),
+               names_to = "day", values_to = "prcp_cm") %>%
+  drop_na() %>%
+  mutate(day = str_replace(day, "value", ""),
+         date = ymd(glue("{year}-{month}-{day}")),
+         prcp_cm = as.numeric(prcp_cm)/100) %>%
+  select(id, date, prcp_cm) %>%
+  write_tsv("data/composite_dly.tsv")
+
+         
