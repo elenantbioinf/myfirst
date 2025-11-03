@@ -1,5 +1,6 @@
 #!/usr/bin/env Rscript
 
+
 library(tidyverse)
 library(lubridate)
 library(glue)
@@ -57,8 +58,5 @@ lat_long_prcp %>%
         plot.subtitle = element_text(color = "white"),
         plot.caption = element_text(color = "white"))
   
-dir.create("figures")
-
-ggsave("figures/world_drought.png", width = 8, height = 4)
-  
+ggsave("visual/world_drought.png", width = 8, height = 4)
 
