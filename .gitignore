@@ -1,5 +1,7 @@
 data/
 
+Rplots.pdf
+
 # History files
 .Rhistory
 .Rapp.history
@@ -52,3 +54,5 @@ rsconnect/
 
 # SnakeMake
 .snakemake
+
+
