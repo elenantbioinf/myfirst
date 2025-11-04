@@ -1,0 +1,28 @@
+---
+title: Drought index for world
+author: Elena Nuñez
+output: html_document
+email_address: elena.nt.bioinf@gmail.com
+github_repo: https://github.com/elenantbioinf/drought
+---
+
+```{css echo = FALSE}
+
+.author, .title {
+    display: none;
+    }
+.main-container{
+    max-width: 100%;
+}
+body {
+    background-color: black;
+    color: white;
+    font-size:1.2vw;
+}
+```
+
+![](visual/world_drought.png)
+
+Last update on `r lubridate::today()`  
+Site [developed](`r rmarkdown::metadata$github_repo`) 
+by [Elena Nuñez](mailto: `r rmarkdown::metadata$email_address`)  
