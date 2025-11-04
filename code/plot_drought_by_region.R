@@ -4,6 +4,14 @@
 library(tidyverse)
 library(lubridate)
 library(glue)
+library(showtext)
+library(sysfonts)
+
+#Selección fuente de letra
+font_add_google("DM Serif Text", family = "dm-serif")
+font_add_google("Montserrat", family = "montserrat")
+
+showtext_auto()
 
 #Lectura de datos
 prcp_data <- read_tsv("data/ghcnd_tidy.tsv.gz")
@@ -49,14 +57,17 @@ lat_long_prcp %>%
         plot.background = element_rect(fill = "black", color = "black"),
         panel.grid = element_blank(),
         legend.background = element_blank(),
-        legend.text = element_text(color="white"),
+        legend.text = element_text(color="white", family = "montserrat"),
         legend.position = c(0.2, 0.05),
         legend.direction = "horizontal", 
         legend.key.height = unit(0.25, "cm"),
         axis.text = element_blank(),
-        plot.title = element_text(color = "white", hjust = 0.5, size = 16),
-        plot.subtitle = element_text(color = "white"),
-        plot.caption = element_text(color = "white"))
+        plot.title = element_text(color = "white", hjust = 0.5, size = 50,
+                                  family = "dm-serif"),
+        plot.subtitle = element_text(color = "white", size = 30,
+                                    family = "montserrat"),
+        plot.caption = element_text(color = "white", size = 25,
+                                    family = "montserrat"))
   
 ggsave("visual/world_drought.png", width = 8, height = 4)
 
