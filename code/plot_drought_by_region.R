@@ -54,7 +54,7 @@ lat_long_prcp %>%
         legend.direction = "horizontal", 
         legend.key.height = unit(0.25, "cm"),
         axis.text = element_blank(),
-        plot.title = element_text(color = "white", hjust = 0.5, size = 20),
+        plot.title = element_text(color = "white", hjust = 0.5, size = 16),
         plot.subtitle = element_text(color = "white"),
         plot.caption = element_text(color = "white"))
   
