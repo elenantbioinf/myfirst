@@ -23,7 +23,7 @@ body {
     background-color: black;
     color: white;
     font-size:1.2vw;
-    font-family: "Monserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 ```
 
